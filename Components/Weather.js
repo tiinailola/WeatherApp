@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, Dimensions, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Image, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import Search from "./Search";
-import CityWise from "../Screens/CityWise";
 
 export default function Weather({ weatherData, fetchWeatherData }) {
 

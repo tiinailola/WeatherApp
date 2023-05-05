@@ -8,7 +8,6 @@ import { Camera } from "expo-camera";
 import * as MediaLibrary from 'expo-media-library';
 import { shareAsync } from 'expo-sharing';
 import { Alert } from "react-native";
-import * as Font from 'expo-font';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCWpRbXDxLM_d8PBHrWh2EXhSnrLLDkCx8",

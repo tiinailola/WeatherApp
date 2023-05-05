@@ -1,10 +1,7 @@
-import Reac, { useState, useEffect } from "react";
-import { View, Image, StyleSheet, Alert, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import 'firebase/compat/storage';
 import firebase from "firebase/compat/app";
-import { getStorage, ref, listAll, deleteObject } from 'firebase/storage';
-import { getApps, initializeApp } from 'firebase/app';
-import Current from "./Current";
 import { RefreshControl } from "react-native";
 
 const firebaseConfig = {
@@ -17,9 +14,9 @@ const firebaseConfig = {
     appId: "1:288468601775:web:125afd9604732105803d5a",
     measurementId: "G-F1X5XT80PX"
   };
-  
-if (!getApps().length) {
-   initializeApp(firebaseConfig);
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
 }
 
 const storage = firebase.storage();
@@ -40,24 +37,16 @@ export default function Library({ refreshing }) {
             });
     }, []);
 
-    const deletePic = async () => {
-        deleteObject(imageRef).then(() => {
-            Alert.alert('Photo deleted');
-        }).catch((error) => {
-            Alert.alert('Oh no, error!');
-        });
-    }
-
     return (
         <ScrollView
             refreshControl={
                 <RefreshControl
                     onRefresh={() => { Library }}
                     refreshing={refreshing}
-            />}
+                />}
             >
             <View style={styles.container}>
-                <TouchableOpacity onLongPress={deletePic}>
+                <TouchableOpacity>
                 {imageUrls.map((url, index) => (
                 <Image key={index} source={{ uri: url }} style={styles.image} />
             ))}
@@ -72,18 +61,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#c8e6c9',
         alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        flexDirection: 'column',
-        alignSelf: 'stretch',
     },
     image: {
         marginTop: 30,
         width: 250,
-        height: 200,
-        margin: 5,
-        resizeMode: "center",
-        flexDirection: 'column',
-        justifyContent: 'center'
+        height: 250,
+        margin: 1
     }
 });
